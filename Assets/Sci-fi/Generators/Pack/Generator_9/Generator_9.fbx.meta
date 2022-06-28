@@ -1,0 +1,184 @@
+fileFormatVersion: 2
+guid: 9cafbbc847fd1774f9b56303e7ea326e
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Bolt_1
+    100002: Bolt_10
+    100004: Bolt_11
+    100006: Bolt_12
+    100008: Bolt_13
+    100010: Bolt_14
+    100012: Bolt_15
+    100014: Bolt_16
+    100016: Bolt_2
+    100018: Bolt_3
+    100020: Bolt_4
+    100022: Bolt_5
+    100024: Bolt_6
+    100026: Bolt_7
+    100028: Bolt_8
+    100030: Bolt_9
+    100032: //RootNode
+    100034: Generator_9
+    100036: Parts
+    400000: Bolt_1
+    400002: Bolt_10
+    400004: Bolt_11
+    400006: Bolt_12
+    400008: Bolt_13
+    400010: Bolt_14
+    400012: Bolt_15
+    400014: Bolt_16
+    400016: Bolt_2
+    400018: Bolt_3
+    400020: Bolt_4
+    400022: Bolt_5
+    400024: Bolt_6
+    400026: Bolt_7
+    400028: Bolt_8
+    400030: Bolt_9
+    400032: Generator_9
+    400034: //RootNode
+    400036: Parts
+    2100000: mGenerator_9
+    2300000: Bolt_1
+    2300002: Bolt_10
+    2300004: Bolt_11
+    2300006: Bolt_12
+    2300008: Bolt_13
+    2300010: Bolt_14
+    2300012: Bolt_15
+    2300014: Bolt_16
+    2300016: Bolt_2
+    2300018: Bolt_3
+    2300020: Bolt_4
+    2300022: Bolt_5
+    2300024: Bolt_6
+    2300026: Bolt_7
+    2300028: Bolt_8
+    2300030: Bolt_9
+    2300032: Generator_9
+    2300034: Parts
+    3300000: Bolt_1
+    3300002: Bolt_10
+    3300004: Bolt_11
+    3300006: Bolt_12
+    3300008: Bolt_13
+    3300010: Bolt_14
+    3300012: Bolt_15
+    3300014: Bolt_16
+    3300016: Bolt_2
+    3300018: Bolt_3
+    3300020: Bolt_4
+    3300022: Bolt_5
+    3300024: Bolt_6
+    3300026: Bolt_7
+    3300028: Bolt_8
+    3300030: Bolt_9
+    3300032: Generator_9
+    3300034: Parts
+    4300000: Generator_9
+    4300002: Parts
+    4300004: Bolt_1
+    4300006: Bolt_2
+    4300008: Bolt_3
+    4300010: Bolt_4
+    4300012: Bolt_5
+    4300014: Bolt_6
+    4300016: Bolt_7
+    4300018: Bolt_8
+    4300020: Bolt_9
+    4300022: Bolt_10
+    4300024: Bolt_11
+    4300026: Bolt_12
+    4300028: Bolt_13
+    4300030: Bolt_14
+    4300032: Bolt_15
+    4300034: Bolt_16
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mGenerator_9
+    second: {fileID: 2100000, guid: ac9ea051266590244a0d8fba345b3716, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

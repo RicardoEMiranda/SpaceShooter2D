@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2700752223078098179}
   m_Layer: 0
   m_Name: PowerUp_TrippleShot
-  m_TagString: PowerUp_TrippleShot
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,7 +151,9 @@ MonoBehaviour:
   speed: -3
   powerupID: 0
   audioSource: {fileID: 0}
-  audioPowerup: {fileID: 0}
+  audioPowerUp: {fileID: 0}
+  audioExplosion: {fileID: 0}
+  plasma: {fileID: 0}
 --- !u!95 &5308978614516990129
 Animator:
   serializedVersion: 4

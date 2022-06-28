@@ -4,32 +4,50 @@ using UnityEngine;
 
 public class PlayerTest : MonoBehaviour {
 
-    [SerializeField] private float _horizontalInput;
-    [SerializeField] private float _verticalInput;
-    [SerializeField] private float _speed = 8.0f;
+    private Vector3 _pos;
+
 
     // Start is called before the first frame update
     void Start() {
-
-
-    }
+       
+        _pos = new Vector3(0, transform.position.y, 0);
+}
 
     // Update is called once per frame
     void Update() {
 
-        _horizontalInput = Input.GetAxis("Horizontal");
-        _verticalInput = Input.GetAxis("Vertical");
-
-        MovePlayer();
+        ConstrainPlayer();
 
     }
 
+    private void ConstrainPlayer() {
+        //Applies scene boundary constraints to the player 
+
+        //obtain current position and allocate to a position variable
+        //We want the current position so we can compare it to our 
+        //known boundary constraints
+        _pos = new Vector3(transform.position.x, transform.position.y, 0);
 
 
-    void MovePlayer() {
-        transform.Translate(new Vector3(1, 0, 0) * _horizontalInput * Time.deltaTime * _speed);
-        transform.Translate(new Vector3(0, 1, 0) * _verticalInput * Time.deltaTime * _speed);
+        //Apply upper boundary limit on the screen
+        //if player position reaches y >= 0 set y = 0 
+        if (_pos.y >= 0) {
+            transform.position = new Vector3(transform.position.x, 0, 0);
+        } else if (_pos.y <= -4.9) {
+            transform.position = new Vector3(transform.position.x, -4.9f, 0);
+        } //Apply lower boundary limit on the screen
+          //if player reaches y<= -4.9 set y = -4.9
+
+        //Apply lateral boundary limits & wrapping on the screen
+        //if x >= 10 set x = -10
+        //if x <= -10 set x = 10
+        if (_pos.x >= 10) {
+            transform.position = new Vector3(-10.0f, _pos.y, 0);
+        }
+        else if (_pos.x <= -10) {
+            transform.position = new Vector3(10.0f, _pos.y, 0);
+        }
+
     }
-
 
 }

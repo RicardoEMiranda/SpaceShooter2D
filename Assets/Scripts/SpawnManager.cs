@@ -6,9 +6,66 @@ public class SpawnManager : MonoBehaviour {
 
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private GameObject[] powerUpPrefab = new GameObject[3];
+    [SerializeField] private GameObject ammoPrefab;
+    [SerializeField] private GameObject powerupMissile;
     [SerializeField] private GameObject _spawnManager;
     [SerializeField] private Transform _enemyContainer;
-    private bool _playerIsDead;
+    [SerializeField] private GameObject ewEnemy;
+    [SerializeField] private GameObject repairPrefab;
+    [SerializeField] private GameObject bomber;
+
+    //Public variables
+    public bool startGame;
+    public bool stopGame;
+    private bool canSpawnEnemy = true;
+    private bool canSpawnEWenemy = true;
+    private bool canSpawnBomber = true;
+
+
+
+    //These fixed variables will need adjusting after Testing
+    private float bomberLaunchTime = 60f; 
+    private float bomberDelay;
+    private float bomberDelayMin = 60f;
+    private float bomberDelayMax = 90f;
+
+    private float enemyLaunchTime = 5f;
+    private float enemyDelay;
+    private float enemyDelayMin = .5f;
+    private float enemyDelayMax = 4f;
+    private float enemyDelayMax2 = 2f;
+    private float enemyDelayMax3 = 1.5f;
+    private float enemyDelayMax4 = .75f;
+
+    private float EWenemyLaunchTime = 20f;
+    private float EWenemyDelay;
+    private float EWenemyDelayMin = 45;
+    private float EWenemyDelayMax = 75;
+
+    private float ammoLaunchTime = 10f;
+    private float ammoPowerupDelay;
+    private float ammoPowerupDelayMin = 20f;
+    private float ammoPowerupDelayMax = 40f;
+
+    private float shieldPowerupLaunchTime =45f; 
+    private float shieldPowerupDelay;
+    private float shieldPowerupDelayMin = 30f; 
+    private float shieldPowerupDelayMax = 60f;
+
+    private float tpsPowerupLaunchTime = 20f;
+    private float tpsPowerupDelay;
+    private float tpsPowerupDelayMin = 30f;
+    private float tpsPowerupDelayMax = 75f;
+
+    private float speedPowerupLaunchTime = 30f;
+    private float speedPowerupDelay;
+    private float speedPowerupDelayMin = 30f;
+    private float speedPowerupDelayMax = 75f;
+
+    private float repairLaunchTime = 60f;
+    private float repairDelay;
+    private float repairDelayMin = 45f;
+    private float repairDelayMax = 75f;
 
     // Start is called before the first frame update
     void Start() {
@@ -16,64 +73,181 @@ public class SpawnManager : MonoBehaviour {
         powerUpPrefab[0] = Resources.Load<GameObject>("PowerUp_TrippleShot");
         powerUpPrefab[1] = Resources.Load<GameObject>("PowerUp_Speed");
         powerUpPrefab[2] = Resources.Load<GameObject>("PowerUp_Shield");
-        //_powerUpPrefab = Resources.Load<GameObject>("PowerUp_TrippleShot");
-        //_spawnManager = Resources.Load<GameObject>("SpawnManager");
+        repairPrefab = Resources.Load<GameObject>("PowerupRepair");
+        ammoPrefab = Resources.Load<GameObject>("PowerupAmmo");
+        powerupMissile = Resources.Load<GameObject>("Powerup_Missile");
+        ewEnemy = Resources.Load<GameObject>("EWEnemy");
+        bomber = Resources.Load<GameObject>("EnemyBomber");
+        
         _spawnManager = GameObject.Find("SpawnManager"); //GameObject.Find(string name) for parent objects
         _enemyContainer = _spawnManager.transform.Find("/SpawnManager/EnemyContainer");
 
     }
 
-    // Update is called once per frame
-    void Update() {
- 
+    private void Update()  {
+
+        if(startGame)  {
+
+            //Spawn Enemies
+            SpawnEnemyBomber();
+            SpawnEnemy();
+            SpawnEWEnemy();
+
+
+            //Spawn Powerups
+            SpawnAmmoPowerup();
+            SpawnShieldPowerup();
+            SpawnSpeedPowerup();
+            SpawnTrippleshotPowerup();
+            SpawnRepairPowerup();
+        }
+
+        if(stopGame)  {
+            canSpawnEnemy = false;
+            canSpawnBomber = false;
+            canSpawnEWenemy = false;
+            
+        }
 
     }
 
-    public void ContinueSpawning() {
-        StartCoroutine(SpawnEnemyRoutine());
-        StartCoroutine(SpawnTrippleShotPowerUp());
-    }
 
-    IEnumerator SpawnEnemyRoutine() {
+    private void SpawnEnemy() {
 
-        yield return new WaitForSeconds(3.0f);
-        //yield return null; //wait 1 frame
-        //then will go to this line
-
-        //yield return new WaitForSeconds(5.0f); //wait 5 seconds
-        //then goes to this line
-
-        while (!_playerIsDead) {
+        if(Time.time >= enemyLaunchTime && canSpawnEnemy)  {
             float xPos = Random.Range(-8f, 8f);
             GameObject newEnemy = Instantiate(_enemyPrefab, new Vector3(xPos, 8, 0), Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
-            float delay = Random.Range(1, 6);
-            yield return new WaitForSeconds(delay);
-        }
 
-
-        //Instantiate(enemy, new Vector3(-4, 8, 0), Quaternion.identity);
-    }
-
-    IEnumerator SpawnTrippleShotPowerUp() {
-        yield return new WaitForSeconds(3.0f);
-
-        while (!_playerIsDead) {
-            float xPos = Random.Range(-8f, 8f);
-            float delayTime = Random.Range(15, 30);
-
-            int prefabID = Random.Range(0, 3);
-            if (prefabID == 2)  {
-                prefabID = Random.Range(1, 3);
+            if(Time.time < 60) {
+                enemyDelay = Random.Range(enemyDelayMin, enemyDelayMax);
+                enemyLaunchTime = Time.time + enemyDelay;
             }
 
-            GameObject newPowerUp = Instantiate(powerUpPrefab[prefabID], new Vector3(xPos, 8, 0), Quaternion.identity);
-            newPowerUp.transform.parent = _enemyContainer.transform;
-            yield return new WaitForSeconds(delayTime);
+            if(Time.time >= 60 && Time.time < 120)  {
+                enemyDelay = Random.Range(enemyDelayMin, enemyDelayMax2);
+                enemyLaunchTime = Time.time + enemyDelay;
+            }
+            if(Time.time >= 120) {
+                enemyDelay = Random.Range(enemyDelayMin, enemyDelayMax3);
+                enemyLaunchTime = Time.time + enemyDelay;
+            }
+
+            if(Time.time >= 180) {
+                enemyDelay = Random.Range(.5f, enemyDelayMax4);
+                enemyLaunchTime = Time.time + enemyDelay;
+            }
+
+            if(Time.time >= 240)  {
+                enemyDelay = Random.Range(.25f, enemyDelayMax4);
+                enemyLaunchTime = Time.time + enemyDelay;
+            }
+
+ 
+        }
+
+    }
+
+    private void SpawnEWEnemy() {
+        if (Time.time >= EWenemyLaunchTime && canSpawnEWenemy)  {
+            GameObject newEnemy = Instantiate(ewEnemy, new Vector3(0, 8, 0), Quaternion.Euler(0, 0, 180f));
+            newEnemy.transform.parent = _enemyContainer.transform;
+            EWenemyDelay = Random.Range(EWenemyDelayMin, EWenemyDelayMax);
+            EWenemyLaunchTime = Time.time + EWenemyDelay;
+            StartCoroutine(EWEnemySpawning());
         }
     }
 
-    public void StopSpawning() {
-        _playerIsDead = true;
+
+    private void SpawnEnemyBomber() {
+
+        if(Time.time >= bomberLaunchTime && canSpawnBomber) {
+            //Think about implementing all the other spawn routines inside of
+            //regular methods with timers.
+            //Then set canSpawn bools inside of those
+            Instantiate(bomber, new Vector3(-7.75f, 8, 0), Quaternion.identity);
+            Instantiate(bomber, new Vector3(7.75f, 8, 0), Quaternion.identity);
+            bomberDelay = Random.Range(bomberDelayMin, bomberDelayMax);
+            bomberLaunchTime = Time.time + bomberDelay;
+            StartCoroutine(BomberSpawning());
+        }
     }
+
+    IEnumerator EWEnemySpawning() {
+        canSpawnEnemy = false;
+        canSpawnBomber = false;
+        yield return new WaitForSeconds(10);
+        canSpawnEnemy = true;
+        canSpawnBomber = true;
+    }
+
+    IEnumerator BomberSpawning() {
+        canSpawnEnemy = false;
+        canSpawnEWenemy = false;
+        yield return new WaitForSeconds(10);
+        canSpawnEnemy = true;
+        canSpawnEWenemy = true;
+
+    }
+
+    private void SpawnRepairPowerup() {
+        if (Time.time >= repairLaunchTime)
+        {
+            float xPos = Random.Range(-8f, 8f);
+            Instantiate(repairPrefab, new Vector3(xPos, 8, 0), Quaternion.identity);
+            repairDelay = Random.Range(repairDelayMin, repairDelayMax);
+            repairLaunchTime = Time.time + repairDelay;
+        }
+    }
+
+    private void SpawnAmmoPowerup()  {
+
+        if (Time.time >= ammoLaunchTime)  {
+            float xPos = Random.Range(-8f, 8f);
+            Instantiate(ammoPrefab, new Vector3(xPos, 8, 0), Quaternion.identity);
+            ammoPowerupDelay = Random.Range(ammoPowerupDelayMin, ammoPowerupDelayMax);
+            ammoLaunchTime = Time.time + ammoPowerupDelay;
+        }
+
+    }
+
+    private void SpawnShieldPowerup() {
+
+        if (Time.time >= shieldPowerupLaunchTime) {
+            float xPos = Random.Range(-8f, 8f);
+            Instantiate(powerUpPrefab[2], new Vector3(xPos, 8, 0), Quaternion.identity);
+            shieldPowerupDelay = Random.Range(shieldPowerupDelayMin, shieldPowerupDelayMax);
+            shieldPowerupLaunchTime = Time.time + shieldPowerupDelay;
+        }
+
+    }
+
+    private void SpawnTrippleshotPowerup() {
+
+        if(Time.time >= tpsPowerupLaunchTime) {
+            float xPos = Random.Range(-8f, 8f);
+            Instantiate(powerUpPrefab[0], new Vector3(xPos, 8, 0), Quaternion.identity);
+            tpsPowerupDelay = Random.Range(tpsPowerupDelayMin, tpsPowerupDelayMax);
+            tpsPowerupLaunchTime = Time.time + tpsPowerupDelay;
+        }
+
+    }
+
+    private void SpawnSpeedPowerup() {
+
+        if (Time.time >= speedPowerupLaunchTime) {
+            float xPos = Random.Range(-8f, 8f);
+            Instantiate(powerUpPrefab[1], new Vector3(xPos, 8, 0), Quaternion.identity);
+            speedPowerupDelay = Random.Range(speedPowerupDelayMin, speedPowerupDelayMax);
+            speedPowerupLaunchTime = Time.time + speedPowerupDelay;
+        }
+
+    }
+
+
+    public void StopSpawning() {
+        stopGame = true;
+        startGame = false;
+    }
+
 }

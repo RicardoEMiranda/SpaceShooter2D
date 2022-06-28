@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8544298193778202743}
   m_Layer: 0
   m_Name: PowerUp_Shield
-  m_TagString: Untagged
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +150,9 @@ MonoBehaviour:
   speed: -3
   powerupID: 2
   audioSource: {fileID: 0}
-  audioPowerup: {fileID: 0}
+  audioPowerUp: {fileID: 0}
+  audioExplosion: {fileID: 0}
+  plasma: {fileID: 0}
 --- !u!82 &8544298193778202743
 AudioSource:
   m_ObjectHideFlags: 0

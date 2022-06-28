@@ -1,0 +1,244 @@
+fileFormatVersion: 2
+guid: 2ceac62f5ba4841448bc5a752a99123e
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Bolt_1
+    100002: Bolt_10
+    100004: Bolt_11
+    100006: Bolt_12
+    100008: Bolt_13
+    100010: Bolt_14
+    100012: Bolt_15
+    100014: Bolt_16
+    100016: Bolt_17
+    100018: Bolt_18
+    100020: Bolt_19
+    100022: Bolt_2
+    100024: Bolt_20
+    100026: Bolt_21
+    100028: Bolt_22
+    100030: Bolt_23
+    100032: Bolt_24
+    100034: Bolt_25
+    100036: Bolt_26
+    100038: Bolt_27
+    100040: Bolt_28
+    100042: Bolt_3
+    100044: Bolt_4
+    100046: Bolt_5
+    100048: Bolt_6
+    100050: Bolt_7
+    100052: Bolt_8
+    100054: Bolt_9
+    100056: //RootNode
+    100058: Generator_5
+    100060: Generator_5_Parts
+    400000: Bolt_1
+    400002: Bolt_10
+    400004: Bolt_11
+    400006: Bolt_12
+    400008: Bolt_13
+    400010: Bolt_14
+    400012: Bolt_15
+    400014: Bolt_16
+    400016: Bolt_17
+    400018: Bolt_18
+    400020: Bolt_19
+    400022: Bolt_2
+    400024: Bolt_20
+    400026: Bolt_21
+    400028: Bolt_22
+    400030: Bolt_23
+    400032: Bolt_24
+    400034: Bolt_25
+    400036: Bolt_26
+    400038: Bolt_27
+    400040: Bolt_28
+    400042: Bolt_3
+    400044: Bolt_4
+    400046: Bolt_5
+    400048: Bolt_6
+    400050: Bolt_7
+    400052: Bolt_8
+    400054: Bolt_9
+    400056: Generator_5
+    400058: //RootNode
+    400060: Generator_5_Parts
+    2100000: mGenerator_5
+    2300000: Bolt_1
+    2300002: Bolt_10
+    2300004: Bolt_11
+    2300006: Bolt_12
+    2300008: Bolt_13
+    2300010: Bolt_14
+    2300012: Bolt_15
+    2300014: Bolt_16
+    2300016: Bolt_17
+    2300018: Bolt_18
+    2300020: Bolt_19
+    2300022: Bolt_2
+    2300024: Bolt_20
+    2300026: Bolt_21
+    2300028: Bolt_22
+    2300030: Bolt_23
+    2300032: Bolt_24
+    2300034: Bolt_25
+    2300036: Bolt_26
+    2300038: Bolt_27
+    2300040: Bolt_28
+    2300042: Bolt_3
+    2300044: Bolt_4
+    2300046: Bolt_5
+    2300048: Bolt_6
+    2300050: Bolt_7
+    2300052: Bolt_8
+    2300054: Bolt_9
+    2300056: Generator_5
+    2300058: Generator_5_Parts
+    3300000: Bolt_1
+    3300002: Bolt_10
+    3300004: Bolt_11
+    3300006: Bolt_12
+    3300008: Bolt_13
+    3300010: Bolt_14
+    3300012: Bolt_15
+    3300014: Bolt_16
+    3300016: Bolt_17
+    3300018: Bolt_18
+    3300020: Bolt_19
+    3300022: Bolt_2
+    3300024: Bolt_20
+    3300026: Bolt_21
+    3300028: Bolt_22
+    3300030: Bolt_23
+    3300032: Bolt_24
+    3300034: Bolt_25
+    3300036: Bolt_26
+    3300038: Bolt_27
+    3300040: Bolt_28
+    3300042: Bolt_3
+    3300044: Bolt_4
+    3300046: Bolt_5
+    3300048: Bolt_6
+    3300050: Bolt_7
+    3300052: Bolt_8
+    3300054: Bolt_9
+    3300056: Generator_5
+    3300058: Generator_5_Parts
+    4300000: Generator_5_Parts
+    4300002: Bolt_3
+    4300004: Bolt_2
+    4300006: Bolt_8
+    4300008: Bolt_6
+    4300010: Bolt_5
+    4300012: Bolt_4
+    4300014: Bolt_10
+    4300016: Bolt_11
+    4300018: Bolt_12
+    4300020: Bolt_7
+    4300022: Bolt_9
+    4300024: Bolt_1
+    4300026: Bolt_14
+    4300028: Bolt_13
+    4300030: Generator_5
+    4300032: Bolt_17
+    4300034: Bolt_22
+    4300036: Bolt_20
+    4300038: Bolt_19
+    4300040: Bolt_18
+    4300042: Bolt_27
+    4300044: Bolt_26
+    4300046: Bolt_25
+    4300048: Bolt_21
+    4300050: Bolt_23
+    4300052: Bolt_16
+    4300054: Bolt_24
+    4300056: Bolt_28
+    4300058: Bolt_15
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mGenerator_5
+    second: {fileID: 2100000, guid: 0364886470ee8f443aaf23c246e35a1a, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
     private BoxCollider2D boxCollider;
+    private Rigidbody2D rigidBody;
     [SerializeField] private float _ySpeed = 3.5f;
     public UIManager _UIManager;
 
@@ -13,16 +14,45 @@ public class Enemy : MonoBehaviour {
     [SerializeField] private AudioClip audioExplosion;
     [SerializeField] private AudioClip audioLaser;
     [SerializeField] private GameObject enemyLaser;
+    [SerializeField] private GameObject explosion;
+    [SerializeField] private GameObject shield;
+    private int shieldRoll;
+    private bool shieldActive;
+
+
+    private int kamikazeRoll;
+    [SerializeField] private bool kamikazeEnemy;
+    [SerializeField] private GameObject player;
+    [SerializeField] private Vector3 playerPosition;
+    [SerializeField] private Vector3 navigationVector;
+    [SerializeField] private GameObject[] powerupArray;
+    [SerializeField] private int noOfPowerups;
+
     private float fireDelay;
     private float fireTime;
     private bool canFire = true;
     private float firePosition;
+    private float randomSpeed;
+    private float xSpeed;
+    private float shootPowerupTimer = 0;
+    private bool canShootPowerup = true;
+
 
     // Start is called before the first frame update
     void Start() {
         _UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();  
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();    
+        rigidBody = GetComponent<Rigidbody2D>();
+        explosion = Resources.Load<GameObject>("Explosion");
+        shield = transform.GetChild(0).gameObject;
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if(GameObject.FindGameObjectsWithTag("Powerup") != null) {
+            powerupArray = GameObject.FindGameObjectsWithTag("Powerup");
+            noOfPowerups = powerupArray.Length;
+        }
+
 
         audioSource = GetComponent<AudioSource>();
         audioExplosion = Resources.Load<AudioClip>("audio_explosion");
@@ -32,6 +62,7 @@ public class Enemy : MonoBehaviour {
         fireTime = 0;
         fireDelay = 3f;
         firePosition = Random.Range(2f, 4.5f);
+        randomSpeed = Random.Range(-1f, 1f);
 
         if (audioExplosion == null)
         {
@@ -42,13 +73,35 @@ public class Enemy : MonoBehaviour {
         {
             Debug.LogError("Audio Source is NULL.");
         }
+
+        shieldRoll = Random.Range(0, 3);
+        if(shieldRoll == 1) {
+            shield.SetActive(true);
+            shieldActive = true;
+        }
+
+        kamikazeRoll = Random.Range(0, 4);
+        if(kamikazeRoll == 2) {
+            kamikazeEnemy = true;
+        }
+
+        playerPosition = player.transform.position;
+        navigationVector = playerPosition - this.transform.position;
+
     }
 
     // Update is called once per frame
     void Update() {
 
         //move down (-x direction) at 4 units/second
-        transform.Translate(new Vector3(0, -1, 0) * Time.deltaTime * _ySpeed);
+        int roll = Random.Range(0, 6);
+        if(roll == 0)  {
+            xSpeed = randomSpeed;
+        } else {
+            xSpeed = 0;
+        }
+
+        TrackPowerups();
 
         FireLaser();
 
@@ -61,6 +114,61 @@ public class Enemy : MonoBehaviour {
             Destroy(this.gameObject);
         }
 
+    }
+
+    void LateUpdate()  {
+        MoveEnemy();
+    }
+
+    private void TrackPowerups()  {
+       
+        for (int i = 0; i < noOfPowerups; i++)  {
+            if (powerupArray[i] != null)  {
+                float xPositionPowerup = powerupArray[i].GetComponent<Transform>().position.x;
+                float xDelta = Mathf.Abs(xPositionPowerup - transform.position.x);
+                if (xDelta <= .5f && canShootPowerup)  {
+                    //Debug.Log("Within Aim Field");
+                    ShootPowerup();
+                }
+            }
+        }
+    }
+
+    private void ShootPowerup() {
+        Instantiate(enemyLaser, transform.position, Quaternion.identity);
+        audioSource.PlayOneShot(audioLaser);
+        StartCoroutine(PausePowerupShooting());
+
+    }
+
+    IEnumerator PausePowerupShooting()  {
+        canShootPowerup = false;
+        yield return new WaitForSeconds(1);
+        canShootPowerup = true;
+    }
+
+    private void MoveEnemy() {
+
+        if (!kamikazeEnemy)  {
+            transform.Translate(new Vector3(xSpeed, -1, 0) * Time.deltaTime * _ySpeed);
+        }
+
+        if(kamikazeEnemy && transform.position.y > 3.5) {
+ 
+            transform.Translate(new Vector3(xSpeed, -1, 0) * Time.deltaTime * _ySpeed);
+        }
+
+        if (kamikazeEnemy && transform.position.y <= 3.5) {
+            playerPosition = player.transform.position;
+            navigationVector = playerPosition - this.transform.position;
+            if (navigationVector.magnitude > .1)  {
+                //transform.Translate(new Vector3(navigationVector.x * 2 , -1 * _ySpeed, 0) * Time.deltaTime );
+                transform.Translate(new Vector3(navigationVector.x, -_ySpeed, 0) * Time.deltaTime, Space.World);
+                if(navigationVector.x < .5)   {
+                    transform.Translate(new Vector3(navigationVector.x * 2.5f, -_ySpeed, 0) * Time.deltaTime, Space.World);
+                }
+            }
+        }
     }
 
     private void FireLaser() {
@@ -88,9 +196,8 @@ public class Enemy : MonoBehaviour {
 
         //if collider is the player, then destry self (Enemy) and call
         //player's damage method
-        if (other.tag == "Laser") {
-
-            Destroy(other);
+        if ((other.tag == "Laser" || other.tag == "Missile") && !shieldActive) {
+            Destroy(other.gameObject);
 
             //before destroying enemy object (self), add 10 points
             //to player score in the UIManager
@@ -106,10 +213,11 @@ public class Enemy : MonoBehaviour {
             _ySpeed = _ySpeed / 2;
             boxCollider.enabled = false;
 
-            audioSource.PlayOneShot(audioExplosion);
-            Destroy(this.gameObject, 2.8f);
+            //audioSource.PlayOneShot(audioExplosion);
+            Instantiate(explosion, this.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
             
-        } else if (other.tag == "Player") {
+        } else if (other.tag == "Player" && !shieldActive) {
             Player player = other.transform.GetComponent<Player>();
             
             if (player != null) {
@@ -126,8 +234,15 @@ public class Enemy : MonoBehaviour {
             _ySpeed = _ySpeed / 2;
             boxCollider.enabled=false;
 
+            //audioSource.PlayOneShot(audioExplosion);
+            Instantiate(explosion, this.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+
+        if((other.tag == "Player" || other.tag == "Laser" || other.tag == "Missile") && shieldActive)  {
+            shield.SetActive(false);
+            shieldActive = false;
             audioSource.PlayOneShot(audioExplosion);
-            Destroy(this.gameObject, 2.8f);
         }
 
     }

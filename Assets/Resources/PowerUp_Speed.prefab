@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8617553118356448500}
   m_Layer: 0
   m_Name: PowerUp_Speed
-  m_TagString: Untagged
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +150,9 @@ MonoBehaviour:
   speed: -3
   powerupID: 1
   audioSource: {fileID: 0}
-  audioPowerup: {fileID: 0}
+  audioPowerUp: {fileID: 0}
+  audioExplosion: {fileID: 0}
+  plasma: {fileID: 0}
 --- !u!82 &8617553118356448500
 AudioSource:
   m_ObjectHideFlags: 0

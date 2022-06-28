@@ -44,7 +44,7 @@ public class Asteroid : MonoBehaviour {
 
             animator.SetInteger("AsteroidState", 1);
             collider.enabled = false;
-            spawnManager.ContinueSpawning();
+            spawnManager.startGame = true;
 
             //can set ySpeed and xSpeed to slow down or to zero
             //if decide to with xSpeed = 0f ySpeed = 0f
