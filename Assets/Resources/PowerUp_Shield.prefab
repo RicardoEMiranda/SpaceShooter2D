@@ -153,6 +153,7 @@ MonoBehaviour:
   audioPowerUp: {fileID: 0}
   audioExplosion: {fileID: 0}
   plasma: {fileID: 0}
+  explosion: {fileID: 0}
 --- !u!82 &8544298193778202743
 AudioSource:
   m_ObjectHideFlags: 0

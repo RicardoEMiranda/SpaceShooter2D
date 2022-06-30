@@ -154,6 +154,7 @@ MonoBehaviour:
   audioPowerUp: {fileID: 0}
   audioExplosion: {fileID: 0}
   plasma: {fileID: 0}
+  explosion: {fileID: 0}
 --- !u!95 &5308978614516990129
 Animator:
   serializedVersion: 4

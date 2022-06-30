@@ -243,9 +243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e880d9bfc5cc53418b33dee20ba952e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -3.5
+  speed: -3
   powerupID: 5
   audioSource: {fileID: 0}
   audioPowerUp: {fileID: 0}
   audioExplosion: {fileID: 0}
   plasma: {fileID: 0}
+  explosion: {fileID: 0}

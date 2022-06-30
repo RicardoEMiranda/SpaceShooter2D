@@ -11,6 +11,8 @@ TagManager:
   - LaserEnemy
   - Missile
   - EWEnemy
+  - Powerup
+  - HomingStun
   layers:
   - Default
   - TransparentFX

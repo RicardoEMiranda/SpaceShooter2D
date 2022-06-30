@@ -13,10 +13,12 @@ public class SpawnManager : MonoBehaviour {
     [SerializeField] private GameObject ewEnemy;
     [SerializeField] private GameObject repairPrefab;
     [SerializeField] private GameObject bomber;
+    [SerializeField] private GameObject boss;
 
     //Public variables
     public bool startGame;
     public bool stopGame;
+    public bool canSpawnBoss;
     private bool canSpawnEnemy = true;
     private bool canSpawnEWenemy = true;
     private bool canSpawnBomber = true;
@@ -67,6 +69,9 @@ public class SpawnManager : MonoBehaviour {
     private float repairDelayMin = 45f;
     private float repairDelayMax = 75f;
 
+    private float bossLaunchTime = 20f;
+
+
     // Start is called before the first frame update
     void Start() {
         _enemyPrefab = Resources.Load<GameObject>("Enemy");
@@ -78,6 +83,7 @@ public class SpawnManager : MonoBehaviour {
         powerupMissile = Resources.Load<GameObject>("Powerup_Missile");
         ewEnemy = Resources.Load<GameObject>("EWEnemy");
         bomber = Resources.Load<GameObject>("EnemyBomber");
+        boss = Resources.Load<GameObject>("BossShip");
         
         _spawnManager = GameObject.Find("SpawnManager"); //GameObject.Find(string name) for parent objects
         _enemyContainer = _spawnManager.transform.Find("/SpawnManager/EnemyContainer");
@@ -92,6 +98,7 @@ public class SpawnManager : MonoBehaviour {
             SpawnEnemyBomber();
             SpawnEnemy();
             SpawnEWEnemy();
+            SpawnBossEnemy();
 
 
             //Spawn Powerups
@@ -111,13 +118,24 @@ public class SpawnManager : MonoBehaviour {
 
     }
 
+    private void SpawnBossEnemy() {
+        //set canSpawnBoss outside of this method, otherwise will override 
+        //external setting
+        if(canSpawnBoss && Time.time > bossLaunchTime) {
+         
+            //Debug.Log("Spawn Boss Enemy");
+            GameObject bossEnemy = Instantiate(boss, new Vector3(0, 8, 0), Quaternion.identity);
+            bossEnemy.transform.parent = _enemyContainer.transform;
+            StartCoroutine(BossSpawning());
+        }
+ 
+    }
 
     private void SpawnEnemy() {
 
         if(Time.time >= enemyLaunchTime && canSpawnEnemy)  {
             float xPos = Random.Range(-8f, 8f);
             GameObject newEnemy = Instantiate(_enemyPrefab, new Vector3(xPos, 8, 0), Quaternion.identity);
-            newEnemy.transform.parent = _enemyContainer.transform;
 
             if(Time.time < 60) {
                 enemyDelay = Random.Range(enemyDelayMin, enemyDelayMax);
@@ -173,20 +191,32 @@ public class SpawnManager : MonoBehaviour {
         }
     }
 
+    IEnumerator BossSpawning() {
+        canSpawnEnemy = false;
+        canSpawnEWenemy = false;
+        canSpawnBomber = false;
+        canSpawnBoss = false;
+        yield return new WaitForSeconds(1);
+    }
+
     IEnumerator EWEnemySpawning() {
         canSpawnEnemy = false;
         canSpawnBomber = false;
+        canSpawnBoss = false;
         yield return new WaitForSeconds(10);
         canSpawnEnemy = true;
         canSpawnBomber = true;
+        canSpawnBoss = true;
     }
 
     IEnumerator BomberSpawning() {
         canSpawnEnemy = false;
         canSpawnEWenemy = false;
+        canSpawnBoss = false;
         yield return new WaitForSeconds(10);
         canSpawnEnemy = true;
         canSpawnEWenemy = true;
+        canSpawnBoss = true;
 
     }
 

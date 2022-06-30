@@ -35,6 +35,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private AudioClip audioINeedAmmo;
     [SerializeField] private AudioClip audioImHit;
     [SerializeField] private AudioClip audioReactorFailure;
+    [SerializeField] private HomingStun homingStun;
     private float targetTime = 0f;
     private float imHitTargetTime = 0;
 
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour {
     public CameraShake cameraShake;
     private bool reactorStunned;
     private float messageTimer = 0;
+    public bool collect;
 
 
     [SerializeField] private GameObject missile;
@@ -91,6 +93,7 @@ public class Player : MonoBehaviour {
             Debug.LogError("Audio Source is NULL.");
         }
 
+
         audioINeedAmmo = Resources.Load<AudioClip>("audio_IneedAmmo");
         audioImHit = Resources.Load<AudioClip>("audio_ImHit");
         audioReactorFailure = Resources.Load<AudioClip>("audio_ReactorFailure");
@@ -108,6 +111,11 @@ public class Player : MonoBehaviour {
         //leftShiftDown = Input.GetKey(KeyCode.LeftShift);
         leftShiftDown = Input.GetKeyDown(KeyCode.LeftShift);
         leftShiftUp = Input.GetKeyUp(KeyCode.LeftShift);
+        collect = Input.GetKey(KeyCode.C);
+
+        if (GameObject.FindGameObjectWithTag("HomingStun") != null)  {
+            homingStun = GameObject.FindGameObjectWithTag("HomingStun").GetComponent<HomingStun>();
+        }
 
         ManageThruster();
         MovePlayer();
@@ -358,7 +366,12 @@ public class Player : MonoBehaviour {
 
     IEnumerator StunReactor() {
         reactorStunned = true;
-        yield return new WaitForSeconds(15);
+        int stunDelay = 15;
+        if(homingStun.isBoss) {
+            stunDelay = 5;
+        }
+   
+        yield return new WaitForSeconds(stunDelay);
         reactorStunned = false;
     }
 

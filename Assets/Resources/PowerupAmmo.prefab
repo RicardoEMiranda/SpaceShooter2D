@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3791691760183122525}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.88, y: -1.7564218, z: -3.36263}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -344093311
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9840ca0470348a541b37b3132187c136, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -106,6 +106,7 @@ MonoBehaviour:
   audioPowerUp: {fileID: 0}
   audioExplosion: {fileID: 0}
   plasma: {fileID: 0}
+  explosion: {fileID: 0}
 --- !u!61 &8425478653612137066
 BoxCollider2D:
   m_ObjectHideFlags: 0

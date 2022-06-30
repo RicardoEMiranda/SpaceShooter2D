@@ -36,6 +36,10 @@ public class LaserEnemy : MonoBehaviour {
 
         }
 
+        if(transform.position.y < -7) {
+            Destroy(this.gameObject);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

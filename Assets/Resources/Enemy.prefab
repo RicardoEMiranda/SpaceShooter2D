@@ -110,6 +110,12 @@ MonoBehaviour:
   enemyLaser: {fileID: 0}
   explosion: {fileID: 0}
   shield: {fileID: 0}
+  kamikazeEnemy: 0
+  player: {fileID: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
+  navigationVector: {x: 0, y: 0, z: 0}
+  powerupArray: []
+  noOfPowerups: 0
 --- !u!50 &5215274268238793149
 Rigidbody2D:
   serializedVersion: 4

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Powerup : MonoBehaviour {
 
     [SerializeField] private float speed = -3f;
+    private float collectionSpeed = 2f;
     private Player _player;
 
     //IDs for Powerups
@@ -22,6 +23,9 @@ public class Powerup : MonoBehaviour {
     private SpriteRenderer renderer;
     [SerializeField] private GameObject plasma;
     [SerializeField] private GameObject explosion;
+    [SerializeField] private Player player;
+    [SerializeField] private GameObject goPlayer;
+    private Vector3 navigationVector;
 
     // Start is called before the first frame update
     void Start() {
@@ -31,6 +35,8 @@ public class Powerup : MonoBehaviour {
         audioExplosion = Resources.Load<AudioClip>("audio_explosion");
         renderer = GetComponent<SpriteRenderer>();
         explosion = Resources.Load<GameObject>("Explosion");
+        player = GameObject.Find("Player").GetComponent<Player>();
+        goPlayer = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -41,7 +47,16 @@ public class Powerup : MonoBehaviour {
         if(Mathf.Abs(transform.position.y) >= 8) {
             Destroy(this.gameObject);
         }
+
+        FindPlayer();
         
+    }
+
+    private void FindPlayer()  {
+        if (player.collect)  {
+            navigationVector = goPlayer.transform.position - transform.position;
+            transform.Translate(navigationVector * Time.deltaTime * .5f, Space.World);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour {
     private GameObject _uiRestartText;
     private Text restartText;
     private Player _player;
+    public bool gameOver;
 
     private float r, g, b, a;
 
@@ -67,7 +68,7 @@ public class UIManager : MonoBehaviour {
         _scoreTextComp.text = "Score: " + score.ToString();
         ammoCountText.text = ammoCount + "/15";
 
-        if(_player._lives == 0 && Input.GetKey("r"))  {
+        if(_player._lives == 0 || gameOver && Input.GetKey("r"))  {
             SceneManager.LoadScene("Scene_Level1");
         } 
 
@@ -115,7 +116,7 @@ public class UIManager : MonoBehaviour {
         StartCoroutine(GameOverRoutine());
     }
 
-    IEnumerator GameOverRoutine() {
+    public IEnumerator GameOverRoutine() {
 
         while (true) {
             yield return new WaitForSeconds(.65f);
@@ -133,11 +134,7 @@ public class UIManager : MonoBehaviour {
             yield return new WaitForSeconds(.65f);
             gameOverText.color = new Color(0, 0, 0, 0);
 
-  
         }
     }
-
-
-
     
 }

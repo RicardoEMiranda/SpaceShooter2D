@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour {
     [SerializeField] private GameObject enemyLaser;
     [SerializeField] private GameObject explosion;
     [SerializeField] private GameObject shield;
+    [SerializeField] private GameObject[] lasers;
     private int shieldRoll;
     private bool shieldActive;
 
@@ -36,6 +37,12 @@ public class Enemy : MonoBehaviour {
     private float xSpeed;
     private float shootPowerupTimer = 0;
     private bool canShootPowerup = true;
+    public bool canEvade = true;
+    public bool inRange;
+    public float evasionFactor = 1;
+    public float evasionSpeed = 0;
+    public float maxEvasionSpeed = 2.5f;
+    private Rigidbody2D rb;
 
 
     // Start is called before the first frame update
@@ -47,6 +54,7 @@ public class Enemy : MonoBehaviour {
         explosion = Resources.Load<GameObject>("Explosion");
         shield = transform.GetChild(0).gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
+        rb = GetComponent<Rigidbody2D>();
 
         if(GameObject.FindGameObjectsWithTag("Powerup") != null) {
             powerupArray = GameObject.FindGameObjectsWithTag("Powerup");
@@ -102,7 +110,6 @@ public class Enemy : MonoBehaviour {
         }
 
         TrackPowerups();
-
         FireLaser();
 
         //if at bottom of screen, respawn at top
@@ -117,8 +124,29 @@ public class Enemy : MonoBehaviour {
     }
 
     void LateUpdate()  {
+        TrackPlayer();
         MoveEnemy();
     }
+
+    private void TrackPlayer ()  {
+
+        if(canEvade)  {
+            if(player != null)  {
+                float delta = player.transform.position.x - transform.position.x;
+                float evasionSpeed = Mathf.Pow(2.718f, -(delta * delta)) * 5;
+
+                if(delta >= 0)  {
+                    evasionSpeed = - Mathf.Pow(2.718f, -(delta * delta)) * 5; ;
+                }
+
+                transform.Translate(new Vector3(evasionSpeed, -_ySpeed, 0) * Time.deltaTime);
+
+                //Debug.Log(evasionSpeed);
+            }
+        }
+  
+    }
+
 
     private void TrackPowerups()  {
        
@@ -149,8 +177,8 @@ public class Enemy : MonoBehaviour {
 
     private void MoveEnemy() {
 
-        if (!kamikazeEnemy)  {
-            transform.Translate(new Vector3(xSpeed, -1, 0) * Time.deltaTime * _ySpeed);
+        if (!kamikazeEnemy && !canEvade)  {
+            transform.Translate(new Vector3(xSpeed, -_ySpeed, 0) * Time.deltaTime );
         }
 
         if(kamikazeEnemy && transform.position.y > 3.5) {
