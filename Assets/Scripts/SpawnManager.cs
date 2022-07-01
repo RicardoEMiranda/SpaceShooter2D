@@ -74,7 +74,7 @@ public class SpawnManager : MonoBehaviour {
     private float missileDelayMin = 20f;
     private float missileDelayMax = 45f;
 
-    private float bossLaunchTime = 10f;
+    private float bossLaunchTime = 120f;
 
 
     // Start is called before the first frame update

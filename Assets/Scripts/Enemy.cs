@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour {
     private float xSpeed;
     private float shootPowerupTimer = 0;
     private bool canShootPowerup = true;
-    public bool canEvade = true;
+    public bool canEvade;
     public bool inRange;
     public float evasionFactor = 1;
     public float evasionSpeed = 0;
@@ -61,6 +61,13 @@ public class Enemy : MonoBehaviour {
             noOfPowerups = powerupArray.Length;
         }
 
+        int evadeRoll = Random.Range(0, 4);
+        if(evadeRoll == 2) {
+            canEvade = true;
+        } else  {
+            canEvade = false;
+        }
+        Debug.Log(evadeRoll);
 
         audioSource = GetComponent<AudioSource>();
         audioExplosion = Resources.Load<AudioClip>("audio_explosion");
