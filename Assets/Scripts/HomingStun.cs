@@ -19,8 +19,10 @@ public class HomingStun : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        if (GameObject.Find("Player") != null) { 
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
+        }
         navigationVector = player.transform.position - transform.position;
         navigationVectorX = navigationVector.x;
         navigationVectorY = navigationVector.y;
