@@ -69,7 +69,7 @@ public class SpawnManager : MonoBehaviour {
     private float repairDelayMin = 45f;
     private float repairDelayMax = 75f;
 
-    private float bossLaunchTime = 20f;
+    private float bossLaunchTime = 60f;
 
 
     // Start is called before the first frame update

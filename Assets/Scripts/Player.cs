@@ -366,9 +366,9 @@ public class Player : MonoBehaviour {
 
     IEnumerator StunReactor() {
         reactorStunned = true;
-        int stunDelay = 15;
+        int stunDelay = 10;
         if(homingStun.isBoss) {
-            stunDelay = 5;
+            //stunDelay = 5;
         }
    
         yield return new WaitForSeconds(stunDelay);

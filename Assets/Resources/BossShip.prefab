@@ -140,7 +140,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -248,6 +248,10 @@ MonoBehaviour:
   bigExplosion: {fileID: 0}
   uiManager: {fileID: 0}
   spawnManager: {fileID: 0}
+  homingStun: {fileID: 0}
+  audioSource: {fileID: 0}
+  bossThemeClip: {fileID: 0}
+  cameraShake: {fileID: 0}
 --- !u!1 &4339940946154786258
 GameObject:
   m_ObjectHideFlags: 0
