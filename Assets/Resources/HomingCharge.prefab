@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1291243092786270446}
   m_Layer: 0
   m_Name: HomingCharge
-  m_TagString: Untagged
+  m_TagString: HomingCharge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

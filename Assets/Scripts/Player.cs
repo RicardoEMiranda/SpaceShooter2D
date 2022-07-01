@@ -434,7 +434,7 @@ public class Player : MonoBehaviour {
             audioSource.PlayOneShot(audioExplosion);
         }
 
-        if((other.gameObject.tag == "Enemy" || other.gameObject.tag == "LaserEnemy") || other.gameObject.tag == "EWEnemy" && _shieldBoostEnabled) {
+        if((other.gameObject.tag == "Enemy" || other.gameObject.tag == "LaserEnemy") || other.gameObject.tag == "EWEnemy" || other.gameObject.tag == "HomingStun" || other.gameObject.tag == "HomingCharge" && _shieldBoostEnabled) {
 
             shieldHit += 1;
             if (shieldHit == 1) {

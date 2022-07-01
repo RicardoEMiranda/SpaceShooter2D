@@ -69,7 +69,12 @@ public class SpawnManager : MonoBehaviour {
     private float repairDelayMin = 45f;
     private float repairDelayMax = 75f;
 
-    private float bossLaunchTime = 120f;
+    private float missileLaunchTime = 20f;
+    private float missileDelay;
+    private float missileDelayMin = 20f;
+    private float missileDelayMax = 45f;
+
+    private float bossLaunchTime = 10f;
 
 
     // Start is called before the first frame update
@@ -107,6 +112,7 @@ public class SpawnManager : MonoBehaviour {
             SpawnSpeedPowerup();
             SpawnTrippleshotPowerup();
             SpawnRepairPowerup();
+            SpawnMissilePowerup();
         }
 
         if(stopGame)  {
@@ -206,6 +212,7 @@ public class SpawnManager : MonoBehaviour {
         yield return new WaitForSeconds(10);
         canSpawnEnemy = true;
         canSpawnBomber = true;
+        yield return new WaitForSeconds(10);
         canSpawnBoss = true;
     }
 
@@ -218,6 +225,15 @@ public class SpawnManager : MonoBehaviour {
         canSpawnEWenemy = true;
         canSpawnBoss = true;
 
+    }
+
+    private void SpawnMissilePowerup() {
+        if(Time.time >= missileLaunchTime)  {
+            float xPos = Random.Range(-8f, 8f);
+            Instantiate(powerupMissile, new Vector3(xPos, 8, 0), Quaternion.identity);
+            missileDelay = Random.Range(missileDelayMin, missileDelayMax);
+            missileLaunchTime = Time.time + missileDelay;
+        }
     }
 
     private void SpawnRepairPowerup() {

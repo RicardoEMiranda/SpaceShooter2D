@@ -13,6 +13,7 @@ TagManager:
   - EWEnemy
   - Powerup
   - HomingStun
+  - HomingCharge
   layers:
   - Default
   - TransparentFX
